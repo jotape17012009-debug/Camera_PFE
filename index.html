@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplicação para capturar e processar fotografias com a câmera.">
+  <title>CaptureCam | Câmera e Canvas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">◎</span>
+      <span>Capture<span class="brand-accent">Cam</span></span>
+    </a>
+    <span class="topbar-label">
+      <span class="status-dot"></span>
+      PROCESSAMENTO NO NAVEGADOR
+    </span>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p class="eyebrow">PROGRAMAÇÃO FRONT-END</p>
+      <h1>Sua imagem.<br><span>Seu momento.</span></h1>
+      <p class="intro-text">
+        Capture uma foto, aplique um efeito e crie uma imagem personalizada
+        com identificação, data e hora.
+      </p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel camera-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">ETAPA 01</p>
+            <h2>Câmera</h2>
+          </div>
+          <span id="cameraStatus" class="status-pill inactive">
+            <span class="status-dot"></span> Desligada
+          </span>
+        </div>
+
+        <div class="camera-frame">
+          <video id="video" autoplay playsinline muted></video>
+
+          <div id="cameraPlaceholder" class="camera-placeholder">
+            <div class="placeholder-icon">📷</div>
+            <h3>Sua câmera está desligada</h3>
+            <p>Ligue a câmera para começar a capturar.</p>
+          </div>
+
+          <span class="live-tag" id="liveTag">● AO VIVO</span>
+        </div>
+
+        <div class="camera-actions">
+          <button id="toggleCamera" class="button button-primary" type="button">
+            ▶ Ligar câmera
+          </button>
+          <button id="captureButton" class="button button-secondary" type="button" disabled>
+            ◎ Capturar foto
+          </button>
+        </div>
+
+        <p id="message" class="message" role="status" aria-live="polite">
+          Permita o acesso à câmera para começar.
+        </p>
+      </div>
+
+      <div class="panel settings-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">ETAPA 02</p>
+            <h2>Personalize</h2>
+          </div>
+          <span class="step-number">02</span>
+        </div>
+
+        <label for="identity">Identificação da imagem</label>
+        <input
+          id="identity"
+          type="text"
+          maxlength="60"
+          placeholder="Ex.: João Pedro - Turma 3º A"
+          value="Minha captura"
+        >
+
+        <label for="filter">Efeito visual</label>
+
+        <div class="filter-options" role="group" aria-label="Escolha o efeito visual">
+          <button class="filter-option selected" type="button"
+            data-filter="none" aria-pressed="true">
+            <span class="filter-preview original-preview">Aa</span>
+            <span>Original</span>
+          </button>
+
+          <button class="filter-option" type="button"
+            data-filter="grayscale" aria-pressed="false">
+            <span class="filter-preview mono-preview">Aa</span>
+            <span>P&B</span>
+          </button>
+
+          <button class="filter-option" type="button"
+            data-filter="sepia" aria-pressed="false">
+            <span class="filter-preview sepia-preview">Aa</span>
+            <span>Sépia</span>
+          </button>
+
+          <button class="filter-option" type="button"
+            data-filter="contrast" aria-pressed="false">
+            <span class="filter-preview contrast-preview">Aa</span>
+            <span>Contraste</span>
+          </button>
+        </div>
+
+        <div class="info-card">
+          <span class="info-icon">✦</span>
+          <div>
+            <strong>Identificação incorporada</strong>
+            <p>
+              O texto e o horário serão desenhados diretamente na fotografia
+              usando o Canvas.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel-heading result-heading">
+          <div>
+            <p class="section-kicker">ETAPA 03</p>
+            <h2>Resultado</h2>
+          </div>
+        </div>
+
+        <div class="result-frame" id="resultFrame">
+          <div id="resultPlaceholder" class="result-placeholder">
+            <span>▧</span>
+            <p>Sua foto processada aparecerá aqui.</p>
+          </div>
+
+          <canvas id="canvas" hidden></canvas>
+
+          <img
+            id="resultImage"
+            alt="Fotografia capturada e processada"
+            hidden
+          >
+        </div>
+
+        <button id="downloadButton" class="button button-download"
+          type="button" disabled>
+          ↓ Salvar imagem PNG
+        </button>
+
+        <button id="retakeButton" class="text-button" type="button" disabled>
+          ↻ Fazer outra captura
+        </button>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <div>
+        <span class="mini-icon">01</span>
+        <p><strong>Ligue</strong><br>Permita o uso da câmera.</p>
+      </div>
+      <div>
+        <span class="mini-icon">02</span>
+        <p><strong>Personalize</strong><br>Escolha texto e efeito.</p>
+      </div>
+      <div>
+        <span class="mini-icon">03</span>
+        <p><strong>Capture e salve</strong><br>Baixe sua imagem final.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>CaptureCam • Projeto acadêmico de Programação Front-End</p>
+      <p>MediaDevices + getUserMedia + Canvas</p>
+    </footer>
+  </main>
+</body>
+</html>
